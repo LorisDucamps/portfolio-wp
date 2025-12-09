@@ -23,11 +23,12 @@ add_action( 'after_setup_theme', 'loris_portfolio_theme_setup' );
  * Chargement des assets CSS / JS
  */
 function loris_portfolio_enqueue_assets() {
-	wp_enqueue_style(
-		'loris-portfolio-style',
-		get_stylesheet_uri(),
-		[],
-		wp_get_theme()->get( 'Version' )
-	);
+    wp_enqueue_style(
+        'loris-portfolio-style',
+        get_stylesheet_uri(),
+        [],
+        filemtime( get_stylesheet_directory() . '/style.css' )
+    );
 }
 add_action( 'wp_enqueue_scripts', 'loris_portfolio_enqueue_assets' );
+

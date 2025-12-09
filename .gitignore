@@ -1,0 +1,141 @@
+#################################################################
+# WORDPRESS CORE (NEVER VERSION)
+#################################################################
+
+# Core directories
+wp-admin/
+wp-includes/
+
+# Core PHP files at root
+wp-*.php
+
+# Core root files
+license.txt
+readme.html
+xmlrpc.php
+local-xdebuginfo.php
+
+
+#################################################################
+# WP-CONTENT — IGNORE EVERYTHING EXCEPT CUSTOM THEME/PLUGINS
+#################################################################
+
+# Uploads (large, generated, environment-specific)
+wp-content/uploads/
+
+# Caches
+wp-content/cache/
+wp-content/debug.log
+wp-content/litespeed/
+wp-content/upgrade/
+
+# Languages (environment-dependent)
+wp-content/languages/
+
+# Plugins (ignore all except custom)
+wp-content/plugins/*
+
+# BUT allow custom plugins (remove # if needed)
+# !wp-content/plugins/my-custom-plugin/
+
+# Themes — ignore ALL themes EXCEPT yours
+wp-content/themes/*
+!wp-content/themes/loris-portfolio/
+!wp-content/themes/loris-portfolio/**
+
+
+#################################################################
+# SENSITIVE FILES
+#################################################################
+
+wp-config.php
+.htaccess
+.env
+.env.local
+.env.*
+*.key
+*.pem
+
+
+#################################################################
+# NODE / NPM / BUILD TOOLS
+#################################################################
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+dist/
+build/
+.vite/
+
+# Parcel / Webpack / Rollup
+.cache/
+.rollup.cache/
+.vite/
+
+
+#################################################################
+# PHP / COMPOSER
+#################################################################
+
+vendor/
+composer.lock
+composer.phar
+
+
+#################################################################
+# SYSTEM FILES (Mac, Windows, Linux)
+#################################################################
+
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+
+#################################################################
+# IDE & EDITOR SETTINGS
+#################################################################
+
+# VSCode
+.vscode/
+.history/
+*.code-workspace
+
+# PHPStorm / JetBrains
+.idea/
+*.iml
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+
+#################################################################
+# LOGS & TEMP FILES
+#################################################################
+
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.orig
+
+
+#################################################################
+# LOCALWP / DOCKER / MAMP
+#################################################################
+
+# LocalWP config folders
+local.json
+sql/
+logs/
+conf/
+
+# Docker
+docker-compose.yml
+.docker/

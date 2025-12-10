@@ -83,6 +83,7 @@ add_action( 'wp_enqueue_scripts', function () {
 add_filter( 'wp_get_global_stylesheet', '__return_empty_string' );
 add_filter( 'wp_get_global_stylesheet_for_blocks', '__return_empty_string' );
 
+
 // 4.3 Empêcher l’inclusion des presets CSS dans le head
 add_filter( 'wp_theme_json_data_default', function( $data ) {
 
@@ -113,7 +114,7 @@ add_filter( 'render_block', function( $block_content, $block ) {
  * 5. Nettoyage du <head>
  * ------------------------------------------------------------
  */
-remove_action( 'wp_head', 'rest_output_link_wp_head' );      // API REST
-remove_action( 'wp_head', 'wp_oembed_add_discovery_links' ); // oEmbed
-remove_action( 'wp_head', 'rsd_link' );                      // RSD XML
-remove_action( 'wp_head', 'wlwmanifest_link' );              // Windows Live Writer
+remove_action( 'wp_head', 'rest_output_link_wp_head' );
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wlwmanifest_link' );

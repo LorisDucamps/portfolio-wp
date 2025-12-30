@@ -7,3 +7,112 @@ Description: Thème portfolio minimal personnalisé.
 Version: 1.0
 Text Domain: loris-portfolio
 */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* FONTS */
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/poppins/poppins-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #0f172a;
+  --color-primary: #2563eb;
+}
+
+html[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-text: #e5e7eb;
+  --color-primary: #60a5fa;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* HEADER */
+
+/* INTRODUCTION */
+
+/* CONTENT AND EXPERIENCE */
+
+/* FOOTER */

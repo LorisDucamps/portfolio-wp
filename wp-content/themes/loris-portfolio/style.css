@@ -18,6 +18,10 @@ Text Domain: loris-portfolio
   margin: 0;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
 }
@@ -48,8 +52,12 @@ h6 {
   overflow-wrap: break-word;
 }
 
-p {
+p,
+span {
   text-wrap: pretty;
+  font-family: 'Poppins';
+  font-size: 1.6rem;
+  color: var(--color-text);
 }
 
 h1,
@@ -58,14 +66,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: 'Playfair-Display-Bold';
   font-weight: 400;
+  color: var(--color-title);
   text-wrap: balance;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline: 0.2rem solid var(--color-primary);
+  outline-offset: 0.2rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -82,7 +91,6 @@ h6 {
 }
 
 /* FONTS */
-
 @font-face {
   font-family: 'Poppins';
   src: url('./assets/fonts/poppins/poppins-400.woff2') format('woff2');
@@ -91,27 +99,91 @@ h6 {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Playfair-Display-Bold';
+  src: url('./assets/fonts/playfair-display/playfair-display-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 :root {
-  --color-bg: #ffffff;
-  --color-text: #0f172a;
-  --color-primary: #2563eb;
+  --color-body: #f9f3f4;
+  --color-container: #FFFFFF;
+  --color-title: #1d293d;
+  --color-text: #45556c;
+  --color-cyan: #00b8db;
 }
 
 html[data-theme="dark"] {
-  --color-bg: #0f172a;
-  --color-text: #e5e7eb;
-  --color-primary: #60a5fa;
+  --color-body: #0f172a;
+  --color-container: #020618;
+  --color-title: #FFFFFF;
+  --color-text: #90a1b9;
+  --color-cyan: #00b8db;
 }
 
 body {
-  background: var(--color-bg);
+  background: var(--color-body);
   color: var(--color-text);
+  font-size: 1.6rem;
+  height: 200vh;
+  padding: clamp(3.2rem, 3vw, 6.4rem);
 }
 
-/* HEADER */
+/* CONTAINER */
+.container {
+  display: block;
+  width: 100%;
+  max-width: 121.6rem;
+  margin: 0 auto;
+  background: var(--color-container);
+}
+
+.container__inner {
+  padding: clamp(3.2rem, 7vw, 9.6rem);
+}
+
+@media screen and (max-width: 640px) {
+  body {
+    padding: 0;
+  }
+}
+
+/* HEADER + NAVIGATION */
+.navigation {
+  position: sticky;
+  top: 0;
+  display: flex;
+  z-index: 10;
+}
+
+.navigation div {
+  flex: 1;
+}
+
+.navigation nav {
+  flex: 1;
+}
+
+.navigation button {
+  flex: 1;
+}
 
 /* INTRODUCTION */
+
+.intro {}
+
+.intro .intro__inner {}
+
+.intro h1 {
+  font-size: clamp(3.2rem, 4vw, 4.8rem);
+}
+
+.intro p {
+  margin-top: 2.4rem;
+}
 
 /* CONTENT AND EXPERIENCE */
 

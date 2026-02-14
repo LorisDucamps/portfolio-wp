@@ -20,6 +20,15 @@ function loris_portfolio_theme_setup()
     // Gestion du <title>
     add_theme_support('title-tag');
 
+    // HTML5 clean
+    add_theme_support('html5', [
+        'search-form',
+        'gallery',
+        'caption',
+        'style',
+        'script'
+    ]);
+
     // Menus
     register_nav_menus(
         [
@@ -45,11 +54,6 @@ function loris_portfolio_enqueue_assets()
     );
 }
 add_action('wp_enqueue_scripts', 'loris_portfolio_enqueue_assets');
-
-
-add_action('wp_enqueue_scripts', function () {
-    error_log('ENQUEUE OK : WordPress charge bien loris-portfolio-style');
-});
 
 /**
  * ------------------------------------------------------------
@@ -124,6 +128,27 @@ remove_action('wp_head', 'rest_output_link_wp_head');
 remove_action('wp_head', 'wp_oembed_add_discovery_links');
 remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wlwmanifest_link');
+remove_action('wp_head', 'wp_generator');
+
+add_filter('the_generator', '__return_empty_string');
+add_filter('style_loader_src', 'loris_remove_wp_version', 9999);
+add_filter('script_loader_src', 'loris_remove_wp_version', 9999);
+add_filter('xmlrpc_enabled', '__return_false');
+add_filter('pings_open', '__return_false', 9999);
+
+
+function loris_remove_wp_version($src)
+{
+    $wp_ver = get_bloginfo('version');
+    $ver = wp_parse_url($src, PHP_URL_QUERY);
+
+    if ($ver && str_contains($ver, 'ver=' . $wp_ver)) {
+        $src = remove_query_arg('ver', $src);
+    }
+    return $src;
+}
+
+
 
 /**
  * ------------------------------------------------------------

@@ -4,7 +4,8 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/poppins/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/playfair-display/playfair-display-700.woff2" as="font" type="font/woff2" crossorigin>
     <?php wp_head(); ?>
 </head>
 

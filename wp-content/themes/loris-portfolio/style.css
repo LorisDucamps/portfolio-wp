@@ -128,7 +128,6 @@ body {
   background: var(--color-body);
   color: var(--color-text);
   font-size: 1.6rem;
-  height: 200vh;
   padding: clamp(3.2rem, 3vw, 6.4rem);
 }
 

@@ -5,7 +5,7 @@
 
         <header class="navigation">
             <div>Logo svg</div>
-            <nav>
+            <nav aria-label="Navigation principale">
                 <ul>
                     <li><a href="">About</a></li>
                     <li><a href="">Articles</a></li>
@@ -13,6 +13,7 @@
                 </ul>
             </nav>
             <button
+                type="button"
                 id="theme-toggle"
                 aria-pressed="false"
                 aria-label="Activer le mode sombre">

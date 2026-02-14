@@ -4,7 +4,7 @@
     <h1><?php the_title(); ?></h1>
 
     <section class="portfolio-grid">
-        <p>Ici mes projets</p>
+        <p>Ici tous projets</p>
     </section>
 </main>
 

@@ -205,3 +205,21 @@ function loris_enqueue_scripts()
     );
 }
 add_action('wp_enqueue_scripts', 'loris_enqueue_scripts');
+
+/**
+ * ------------------------------------------------------------
+ * 8. Restreindre la REST API aux utilisateurs connectés
+ * ------------------------------------------------------------
+ */
+
+add_filter('rest_request_before_callbacks', function ($response, $handler, $request) {
+
+    if (
+        strpos($request->get_route(), '/wp/v2/users') !== false
+        && !is_user_logged_in()
+    ) {
+        return new WP_Error('forbidden', 'Accès interdit.', ['status' => 403]);
+    }
+
+    return $response;
+}, 10, 3);

@@ -11,34 +11,6 @@
 
 defined('ABSPATH') || exit;
 
-// ------------------------------------------------------------
-// Fonts à précharger
-// Ajouter ici chaque variante utilisée dans le projet.
-// ------------------------------------------------------------
-const LORIS_PRELOAD_FONTS = [
-    '/assets/fonts/playfair-display/playfair-display-400.woff2',
-    // '/assets/fonts/inter/inter-400.woff2',
-    // '/assets/fonts/inter/inter-500.woff2',
-];
-
-/**
- * Injecte les balises <link rel="preload"> pour les fonts locales.
- * Priorité 1 pour être au plus haut dans le <head>.
- */
-function loris_preload_fonts(): void
-{
-    $base = get_template_directory_uri();
-
-    foreach (LORIS_PRELOAD_FONTS as $font_path) {
-        printf(
-            '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
-            esc_url($base . $font_path)
-        );
-    }
-}
-add_action('wp_head', 'loris_preload_fonts', 1);
-
-
 /**
  * Feuille de style principale, versionnée via filemtime().
  */

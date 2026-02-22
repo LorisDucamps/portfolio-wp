@@ -26,3 +26,16 @@
         updateAria(next);
     });
 })();
+
+
+// A deporter dans un autre fichier
+
+console.log(
+    "%c👋 Salut !",
+    "font-size:22px;font-weight:bold;color:#0077B6;"
+);
+
+console.log(
+    "%cCurieux(se) ? Le code est fait maison.\nPas de builder, pas de thème premium.\nJuste du propre.",
+    "font-size:14px;color:#161616;"
+);

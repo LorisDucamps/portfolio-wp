@@ -16,7 +16,7 @@ defined('ABSPATH') || exit;
 // Ajouter ici chaque variante utilisée dans le projet.
 // ------------------------------------------------------------
 const LORIS_PRELOAD_FONTS = [
-    '/assets/fonts/playfair-display/playfair-display-700.woff2',
+    '/assets/fonts/playfair-display/playfair-display-400.woff2',
     // '/assets/fonts/inter/inter-400.woff2',
     // '/assets/fonts/inter/inter-500.woff2',
 ];

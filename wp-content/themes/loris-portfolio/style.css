@@ -20,6 +20,7 @@ Text Domain: loris-portfolio
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -67,7 +68,7 @@ h4,
 h5,
 h6 {
   font-family: 'Playfair-Display-Bold';
-  font-weight: 400;
+  font-weight: 700;
   color: var(--color-title);
   text-wrap: balance;
 }

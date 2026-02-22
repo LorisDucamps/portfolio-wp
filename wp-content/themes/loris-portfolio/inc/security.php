@@ -16,14 +16,20 @@ defined('ABSPATH') || exit;
 // Utilise rest_authentication_errors (plus fiable que
 // rest_request_before_callbacks qui ne couvre pas tous les cas).
 // ------------------------------------------------------------
-function loris_restrict_rest_api(\WP_Error|null|true $result): \WP_Error|null|true
+function loris_restrict_rest_api($result)
 {
+
     if (! is_user_logged_in()) {
-        return new WP_Error(
-            'rest_forbidden',
-            __('Accès interdit.', 'loris-portfolio'),
-            ['status' => 403]
-        );
+
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+        if ($method !== 'GET') {
+            return new WP_Error(
+                'rest_forbidden',
+                __('Accès interdit.', 'loris-portfolio'),
+                ['status' => 403]
+            );
+        }
     }
 
     return $result;
@@ -42,7 +48,6 @@ add_filter('rest_authentication_errors', 'loris_restrict_rest_api');
 add_filter('xmlrpc_enabled', '__return_false');
 add_filter('pings_open', '__return_false', 9999);
 
-
 // ------------------------------------------------------------
 // Headers HTTP de sécurité
 // Injectés uniquement en production pour ne pas gêner le debug.
@@ -51,20 +56,14 @@ add_filter('pings_open', '__return_false', 9999);
 // ------------------------------------------------------------
 function loris_security_headers(): void
 {
-    if (WP_ENV !== 'production') {
+    if (wp_get_environment_type() !== 'production') {
         return;
     }
 
-    // Empêche le MIME-type sniffing
     header('X-Content-Type-Options: nosniff');
-
-    // Empêche l'affichage du site dans une iframe (clickjacking)
     header('X-Frame-Options: SAMEORIGIN');
-
-    // Active la protection XSS dans les vieux navigateurs
-    header('X-XSS-Protection: 1; mode=block');
-
-    // Masque le serveur (PHP n'envoie pas X-Powered-By)
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
     header_remove('X-Powered-By');
 }
 add_action('send_headers', 'loris_security_headers');

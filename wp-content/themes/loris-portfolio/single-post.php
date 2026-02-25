@@ -10,8 +10,8 @@
                 <h1><?php the_title(); ?></h1>
 
                 <div class="article-meta">
-                    <time datetime="<?php echo get_the_date('c'); ?>">
-                        <?php echo get_the_date(); ?>
+                    <time datetime="<?php echo esc_attr(get_the_date('c')); ?>">
+                        <?php echo esc_html(get_the_date()); ?>
                     </time>
                 </div>
 

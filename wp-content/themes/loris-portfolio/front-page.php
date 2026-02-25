@@ -6,11 +6,20 @@
         <header class="navigation">
             <div>Logo svg</div>
             <nav aria-label="Navigation principale">
-                <ul>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Articles</a></li>
-                    <li><a href="/portfolio">Portfolio</a></li>
-                </ul>
+                <?php if (has_nav_menu('main-menu')) : ?>
+                    <?php
+                    wp_nav_menu([
+                        'theme_location' => 'main-menu',
+                        'container'      => false,
+                    ]);
+                    ?>
+                <?php else : ?>
+                    <ul>
+                        <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/articles/')); ?>">Articles</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/portfolio/')); ?>">Portfolio</a></li>
+                    </ul>
+                <?php endif; ?>
             </nav>
             <button
                 type="button"
@@ -18,8 +27,6 @@
                 aria-pressed="false"
                 aria-label="Activer le mode sombre">
                 🌙</button>
-
-            </button>
         </header>
 
 
@@ -51,7 +58,7 @@
                             <li class="article-item">
                                 <h3>
                                     <a href="<?php the_permalink(); ?>">
-                                        <?php the_title(); ?>
+                                        <?php echo esc_html(get_the_title()); ?>
                                     </a>
                                 </h3>
 
@@ -69,13 +76,13 @@
         <footer>
             <ul>
                 <li>
-                    <a href="/about">About</a>
+                    <a href="<?php echo esc_url(home_url('/about/')); ?>">About</a>
                 </li>
                 <li>
-                    <a href="/articles">Articles</a>
+                    <a href="<?php echo esc_url(home_url('/articles/')); ?>">Articles</a>
                 </li>
                 <li>
-                    <a href="/portfolio">Portfolio</a>
+                    <a href="<?php echo esc_url(home_url('/portfolio/')); ?>">Portfolio</a>
                 </li>
             </ul>
             <div>

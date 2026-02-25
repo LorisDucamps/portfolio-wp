@@ -42,9 +42,14 @@ add_filter('the_generator', '__return_empty_string');
 
 
 // ------------------------------------------------------------
-// Supprimer le ?ver= de la version WordPress sur les assets
-// Cible uniquement la version WP pour ne pas casser le
-// cache-busting des plugins tiers.
+// Supprimer le ?ver= de la version WordPress sur les assets (optionnel)
+//
+// Désactivé par défaut: la suppression de ?ver peut dégrader le cache-busting
+// après une mise à jour WordPress (navigateurs/CDN gardent un asset périmé).
+// Activer seulement si tu maîtrises le cache côté serveur/CDN:
+//   define('LORIS_REMOVE_WP_ASSET_VERSION', true);
+//
+// Cible uniquement la version WP pour ne pas casser le cache-busting des plugins tiers.
 // ------------------------------------------------------------
 function loris_remove_wp_version_from_assets(string $src): string
 {
@@ -54,8 +59,10 @@ function loris_remove_wp_version_from_assets(string $src): string
 
     return $src;
 }
-add_filter('style_loader_src', 'loris_remove_wp_version_from_assets', 9999);
-add_filter('script_loader_src', 'loris_remove_wp_version_from_assets', 9999);
+if (defined('LORIS_REMOVE_WP_ASSET_VERSION')) {
+    add_filter('style_loader_src', 'loris_remove_wp_version_from_assets', 9999);
+    add_filter('script_loader_src', 'loris_remove_wp_version_from_assets', 9999);
+}
 
 
 // ------------------------------------------------------------

@@ -12,6 +12,24 @@
 defined('ABSPATH') || exit;
 
 /**
+ * Version d'asset robuste (évite les warnings filemtime en déploiement partiel).
+ */
+function loris_asset_version(string $relative_path): string
+{
+    $relative_path = ltrim($relative_path, '/');
+    $full_path     = get_template_directory() . '/' . $relative_path;
+
+    if (file_exists($full_path)) {
+        $mtime = filemtime($full_path);
+        if ($mtime !== false) {
+            return (string) $mtime;
+        }
+    }
+
+    return (string) wp_get_theme()->get('Version');
+}
+
+/**
  * Feuille de style principale, versionnée via filemtime().
  */
 function loris_enqueue_styles(): void
@@ -20,7 +38,7 @@ function loris_enqueue_styles(): void
         'loris-portfolio-style',
         get_stylesheet_uri(),
         [],
-        filemtime(get_stylesheet_directory() . '/style.css')
+        loris_asset_version('style.css')
     );
 }
 add_action('wp_enqueue_scripts', 'loris_enqueue_styles');
@@ -56,43 +74,18 @@ add_action('wp_enqueue_scripts', 'loris_enqueue_color_scheme_init', 0);
 /**
  * Scripts JS d'interaction.
  * Chargés en footer avec stratégie "defer" (non bloquants).
- *
- * En production, on peut conditionner le chargement par template :
- *   if (is_singular('project')) { ... }
  */
 function loris_enqueue_scripts(): void
 {
-    $js_dir = get_template_directory();
     $js_uri = get_template_directory_uri();
 
     wp_enqueue_script(
         'loris-theme-toggle',
         $js_uri . '/assets/js/theme-toggle.js',
         [],
-        filemtime($js_dir . '/assets/js/theme-toggle.js'),
+        loris_asset_version('assets/js/theme-toggle.js'),
         true
     );
     wp_script_add_data('loris-theme-toggle', 'strategy', 'defer');
-
-    // Exemple de chargement conditionnel pour de futurs scripts :
-    // if (is_singular('project')) {
-    //     wp_enqueue_script('loris-project', $js_uri . '/assets/js/project.js', [], filemtime(...), true);
-    //     wp_script_add_data('loris-project', 'strategy', 'defer');
-    // }
 }
 add_action('wp_enqueue_scripts', 'loris_enqueue_scripts');
-
-
-// ------------------------------------------------------------
-// Porte ouverte : block assets granulaires
-//
-// À activer si tu veux charger un CSS uniquement quand
-// un bloc spécifique est présent sur la page,
-// sans pour autant réactiver les Global Styles.
-//
-// add_action('enqueue_block_assets', function () {
-//     if (has_block('core/image')) {
-//         wp_enqueue_style('loris-block-image', get_template_directory_uri() . '/assets/css/blocks/image.css');
-//     }
-// });
-// ------------------------------------------------------------

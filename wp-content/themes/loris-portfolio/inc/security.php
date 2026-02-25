@@ -3,39 +3,12 @@
 /**
  * Sécurité
  *
- * - Blocage REST API pour les utilisateurs non connectés
  * - Désactivation XML-RPC
  * - Désactivation des pings
  * - Headers HTTP de sécurité (en prod uniquement)
  */
 
 defined('ABSPATH') || exit;
-
-// ------------------------------------------------------------
-// REST API — bloquer tous les endpoints aux anonymes.
-// Utilise rest_authentication_errors (plus fiable que
-// rest_request_before_callbacks qui ne couvre pas tous les cas).
-// ------------------------------------------------------------
-function loris_restrict_rest_api($result)
-{
-
-    if (! is_user_logged_in()) {
-
-        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-
-        if ($method !== 'GET') {
-            return new WP_Error(
-                'rest_forbidden',
-                __('Accès interdit.', 'loris-portfolio'),
-                ['status' => 403]
-            );
-        }
-    }
-
-    return $result;
-}
-add_filter('rest_authentication_errors', 'loris_restrict_rest_api');
-
 
 // ------------------------------------------------------------
 // XML-RPC — désactivé (vecteur d'attaque brute force)
